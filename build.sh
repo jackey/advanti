@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
+WORKSPACE=$1
+DOMAIN=$2
 
-if [ "$1" == "" ]; then
+if [ -z "$1"  ]; then
 	WORKSPACE="html"
 fi
 
-if [ "$2" == "" ]; then
+if [ -z "$2" ]; then
 	DOMAIN="drupalyun.com"
 fi
-
 
 # Running drush
 echo "###############################################"

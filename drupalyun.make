@@ -63,7 +63,9 @@ projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg_button_order][subdir] = "contrib"
 projects[xmlsitemap][subdir] = "contrib"
 projects[panels][subdir] = "contrib"
-
+projects[viewreference] = "contrib"
+projects[field_collection] = "contrib"
+projects[rules] = "contrib"
 ; Libraries
 libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "http://github.com/downloads/tinymce/tinymce/tinymce_3.4.7.zip"

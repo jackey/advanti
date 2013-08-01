@@ -1,0 +1,57 @@
+name = DrupalYun
+description = .
+version = VERSION
+core = 7.x
+
+; Core modules
+dependencies[] = block
+dependencies[] = contextual
+dependencies[] = dashboard
+dependencies[] = dblog
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = rdf
+dependencies[] = shortcut
+dependencies[] = taxonomy
+dependencies[] = update
+dependencies[] = locale
+
+; Contrib modules
+dependencies[] = admin_menu
+dependencies[] = admin_menu_toolbar
+dependencies[] = context
+dependencies[] = context_ui
+dependencies[] = ctools
+dependencies[] = default_menu_link
+dependencies[] = date
+dependencies[] = date_api
+dependencies[] = devel
+dependencies[] = link
+dependencies[] = imce_wysiwyg
+dependencies[] = menu_block
+dependencies[] = page_title
+dependencies[] = pathauto
+dependencies[] = redirect
+dependencies[] = smtp
+dependencies[] = strongarm
+dependencies[] = token
+dependencies[] = views
+dependencies[] = views_ui
+dependencies[] = webform
+dependencies[] = wysiwyg
+dependencies[] = xmlsitemap
+dependencies[] = panels
+dependencies[] = panels_mini
+dependencies[] = panels_node
+dependencies[] = panels_ipe
+
+; Custom modules
+
+files[] = drupalyun.profile

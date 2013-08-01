@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
-DOMAIN="drupalyun.com"
+DOMAIN="advanti.local"
 PWD=`pwd`
 
 cd $PWD/html
 
+pwd
 # Install
 drush si drupalyun \
-	--db-url=mysql://root:admin@localhost:3306/drupalyun_com \
+	--db-url=mysql://root:admin@localhost:3306/advanti_local\
 	--account-name=admin \
 	--account-pass=admin \
 	--site-mail=drupalyun@drupalyun.com \
 	--locale=zh-hans \
-	--site-name=DrupalYun \
+	--site-name=advanti \
 	--sites-subdir=$DOMAIN \
 	-y
 
