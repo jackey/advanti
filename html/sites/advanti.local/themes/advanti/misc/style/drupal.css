@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  }
+
+* html .clearfix { height: 1%; } /* IE6 */
+
+.login_nav .nav_box li a {padding: 0 18px;padding-top:45px;}
+
+#skip-link {visibility: hidden;}
+
+.about_th3 {text-indent: 1000px;}
+
+.margin140 {margin-top: 140px;}
+
+.product_nei_list {margin-top: 0px;}
+
+#block-system-main .block-content > p {visibility: hidden;}
+
+.con_con_b {padding-top: 0px;}
+.con_con_b .form-actions {float:right;padding-left:4px;}
+.con_con_r .message label {width: 430px;}
+
+.mot_right dl dd .other_right p {max-height: 105px;max-height:26px;overflow: hidden;}
+
+.other_box {height: 500px;}
+.fil_gallery {background: url(../images/lif/lif_galery.jpg) left top no-repeat;width: 100%;height: 530px;margin-top: 42px;}
+
+.mot_right ul li.share .facebook b {
+	background-position: -76px -77px;
+	width: 13px;
+	height: 14px;
+	position: absolute;
+	left: 0;
+	top: 1px;
+}
+
+.mot_right ul li.share .twitter b {
+	background-position: -59px -77px;
+	width: 16px;
+	height: 13px;
+	position: absolute;
+	left: 0;
+	top: 1px;
+}
+
+.partner_down .facebook {text-indent: 10000}
+.partner_down .twitter {text-indent: 10000}

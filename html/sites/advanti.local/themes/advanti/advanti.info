@@ -1,0 +1,32 @@
+core = 7.x
+description = .
+engine = phptemplate
+base theme = tao
+name = Advanti
+
+; Regions =====================================================================
+
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+regions[content] = Content
+regions[header] = Header
+regions[help] = Help
+regions[footer] = Footer
+regions[highlighted] = Highlighted
+
+; Stylesheets =================================================================
+stylesheets[screen][] = misc/style/index.css
+stylesheets[screen][] = misc/style/style.css
+stylesheets[screen][] = misc/style/drupal.css
+
+; Scripts =====================================================================
+scripts[] = misc/js/connom.js
+scripts[] = misc/js/about_us_two.js
+scripts[] = misc/js/customScroll.js
+scripts[] = misc/js/products.js
+scripts[] = misc/js/scroll.js
+scripts[] = misc/js/section.js
+scripts[] = misc/js/index.js
+scripts[] = misc/js/jquery.VMiddleImg.js
+scripts[] = misc/js/product_list.js
+scripts[] = misc/js/scrollto.js

@@ -54,3 +54,5 @@
  * @see http://drupal.org/documentation/install/multi-site
  */
 $sites["advanti.local"]="advanti.local";
+$sites["webtest01.gotoip2.com.advanti"]="advanti.local";
+$sites["advanti001.gotoip1.com"]="advanti.local";
