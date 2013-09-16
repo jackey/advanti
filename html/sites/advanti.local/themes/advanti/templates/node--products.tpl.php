@@ -1,3 +1,12 @@
+<?php 
+$first_image = NULL;
+foreach ($field_image_media as $image_media) {
+  if ($image_media) break;
+  $image_media = field_collection_item_load($image_media["value"]);
+  $first_image = $image_media;
+}
+?>
+
 <div class="action">
   <ul>
     <li><a href="<?php print url("node/".$nid."/edit")?>">Edit</a></li>
@@ -20,9 +29,9 @@
  	<div class="product_intro_left">
     	<div class="product_intro_img">
        		 <div class="mapk_sha"></div>
-        	 <img src="webfiles/en/images/product/m_img3.png" style="top: 0px; display: block;">
+        	 <img src="<?php print file_create_url($first_image->field_image['und'][0]['uri'])?>">
         </div>
-        <div class="big_img" style="display: none;"><img src="webfiles/en/images/product/m_img3.png" style="left: -50px; top: 0px;"></div>
+        <div class="big_img" style="display: none;"><img src="<?php print file_create_url($first_image->field_image['und'][0]['uri'])?>"></div>
    </div>
     
     <div class="product_intro_right">
@@ -49,17 +58,17 @@
             	<ul> 
             		<?php foreach ($field_image_media as $image_media):?>
             			<?php $image_media = field_collection_item_load($image_media["value"]);?>
-                		<li><a href="javascript:;"><img src="<?php print image_style_url("67_62", $image_media->field_thumbnail['und'][0]['uri'])?>"></a></li>
+                		<li><a href="javascript:;"><img src="<?php print file_create_url($image_media->field_image['und'][0]['uri'])?>"></a></li>
                 	<?php endforeach;?>
                 </ul>
             </div>
         </div>
-        
         <ul class="pshow_list_bot">
-			<?php foreach ($field_image_media as $image_media):?>
-				<?php $image_media = field_collection_item_load($image_media["value"]);?>
-           		<li><img src="<?php print image_style_url("67_62", $image_media->field_image['und'][0]['uri'])?>"></li>
-			<?php endforeach;?>
+          <?php if (!empty($node->field_advanti_technology)):?>
+            <?php foreach ($node->field_advanti_technology[LANGUAGE_NONE] as  $item): ?>
+              <li><img src="<?php print file_create_url($item['uri'])?>"></li>
+            <?php endforeach;?>
+          <?php endif;?>
         </ul>
         
         <div class="pshou_page">

@@ -50,7 +50,7 @@
 		<div class="message">
 			<?php print drupal_render($form["submitted"]["enter_your_message"])?>
 	    </div>
-	    <div class="checkbox"><input type="checkbox"><span></span>E-mail a copy of this message to your own address.</div>
+	    <div class="checkbox"><input type="checkbox" name="email_me"><div style="display:inline" class="inline-text">E-mail a copy of this message to your own address.</div></div>
 	</div>
 	<div class="con_con_b clearfix">
 		<?php 

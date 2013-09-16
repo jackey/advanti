@@ -5,7 +5,7 @@
         <p><?php print $title?></p>
     </div>
     <div class="partner_down">
-    	<a target="_blank" href="<?php print file_create_url($node->field_file[LANGUAGE_NONE][0]['uri'])?>" class="p_down_link">DWONLOAD<i class="more_bg"></i></a>
-        <a target="_blank" href="<?php print file_create_url($node->field_file[LANGUAGE_NONE][0]['uri'])?>" class="p_down"><?php print format_size($node->field_file[LANGUAGE_NONE][0]['filesize'])?></a>
+    	<a target="_blank" href="<?php print file_create_url($node->field_url[LANGUAGE_NONE][0]['url'])?>" class="p_down_link">DWONLOAD<i class="more_bg"></i></a>
+        <a target="_blank" href="<?php print file_create_url($node->field_url[LANGUAGE_NONE][0]['uri'])?>" class="p_down"><?php print ($node->field_file_size[LANGUAGE_NONE][0]['value'])?></a>
     </div>
 </div>

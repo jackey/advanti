@@ -50,6 +50,9 @@ function advanti_preprocess_node(&$vars) {
 	if ($vars["type"] == "webform") {
 		//TODO:
 	}
+	else if ($vars["type"] == "lifestyle_motorsports") {
+		videojs_add();
+	}
 	$vars["statistics"] = statistics_get($vars["node"]->nid);
 	if ($vars["view_mode"] == "teaser") {
 		$vars["theme_hook_suggestions"][] = "node__".$vars["type"]. "__teaser";
@@ -85,6 +88,13 @@ function advanti_preprocess_taxonomy_term(&$vars) {
  */
 function advanti_process_page(&$vars) {
 	$vars["page"]["content"]["system_main"]["#weight"] = -1000;
+}
+
+function advanti_process_html(&$vars) {
+	if (arg(0) == "landing") {
+		$vars["css"] = array();
+		$vars["styles"] = '';
+	}
 }
 
 // Helper function to load all home banner
@@ -198,17 +208,30 @@ function helper_function_group_lifestyle_gallery() {
     return $group_items;
 }
 
-function helper_get_all_countries() {
-    $countries = taxonomy_get_tree(taxonomy_vocabulary_machine_name_load("country")->vid, 0, 2);
+function helper_get_all_countries($parent = 0) {
+    $countries = taxonomy_get_tree(taxonomy_vocabulary_machine_name_load("country")->vid, $parent, 2);
     $ret_countries = array();
     foreach ($countries as $country) {
     	$is_top = $country->parents[0] == 0 ? TRUE : FALSE;
     	if(!$is_top) {
-    		$ret_countries[] = $country;
+    		$ret_countries[] = taxonomy_term_load($country->tid);
     	}
     }
 
     return $ret_countries;
+}
+
+function helper_get_all_regiones() {
+    $countries = taxonomy_get_tree(taxonomy_vocabulary_machine_name_load("country")->vid, 0, 2);
+    $ret_regiones = array();
+    foreach ($countries as $country) {
+    	$is_top = $country->parents[0] == 0 ? TRUE : FALSE;
+    	if($is_top) {
+    		$ret_regiones[] = taxonomy_term_load($country->tid);
+    	}
+    }
+
+    return $ret_regiones;
 }
 
 function help_wallpaper_list() {
@@ -250,6 +273,7 @@ function helper_get_media_in_year($year = "YEAR") {
 			->fieldCondition("field_date", "value", $to_date, "<=");
 	}
 	$ret = $query->propertyCondition("status", 1)
+		->fieldOrderBy("field_date", "value", "DESC")
 		->pager($limit)
 		->execute();
 	if (count($ret['node'])) {
@@ -415,12 +439,26 @@ function helper_get_pre_product_in_type($crt_nid) {
 	}
 }
 
-function helper_get_share_link($site, $node) {
+function helper_get_share_link($node, $small = 'small') {
 	$sites = variable_get('social_share_sites', array());
   foreach ($sites as $site => $enabled) {
     if ($enabled) {
     	$link = _social_share_link($site, $node);
-    	$link["#options"]["attributes"]['class'] .= ' '.strtolower($site);
+    	if ($site == "facebook") {
+    		$link["#options"]["attributes"]['class'] .= ' '.strtolower("face");
+    	}
+    	else {
+    		$link["#options"]["attributes"]['class'] .= ' '.strtolower($site);
+    	}
+    	if ($small == "small") {
+    		$link['#title'] = " ";
+    	}
+    	else if ($small == "medium") {
+    		$link['#title'] = $site;
+    	}
+    	else {
+    		//
+    	}
       	$ret[] = $link;
     }
   }
@@ -434,4 +472,53 @@ function helper_get_visited_count($node) {
 
 function helper_get_download_count($fid, $entity) {
 	return db_query("SELECT COUNT(fid) from {download_count} where fid = :fid AND type = :type AND id = :id", array(':fid' => $fid, ':type' => "node", ':id' => $entity->nid))->fetchField();
+}
+
+function helper_load_all_landing_country_with_group() {
+	$query = new EntityFieldQuery();
+	$ret = $query->entityCondition("entity_type", "node")
+		->entityCondition("bundle", "landing_page1")
+		->propertyCondition("status", 1)
+		->fieldOrderBy("field_order_input", "value", "ASC")
+		->execute();
+
+	$nodes = node_load_multiple(array_keys($ret["node"]));
+	$region_group = array();
+	foreach ($nodes as $node){
+		$region = $node->field_area[LANGUAGE_NONE][0]['value'];
+		if (!$region_group[$region]) {
+			$region_group[$region] = array($node);
+		}
+		else {
+			$region_group[$region][] = $node;
+		}
+	}
+	return $region_group;
+}
+
+function helper_url($url) {
+	if (strpos($url, 'www') !== -1 || strpos($url, "http://") != -1) {
+		$url = url($url, array("absolute" => TRUE));
+	}
+	return $url;
+}
+
+function helper_load_all_landing_images() {
+	$query = new EntityFieldQuery();
+	$ret = $query->entityCondition("entity_type", "node")
+		->entityCondition("bundle", "landing_page2")
+		->propertyCondition("status", 1)
+		->fieldOrderBy("field_order_input", "value", "ASC")
+		->execute();
+
+	$nodes = node_load_multiple(array_keys($ret["node"]));
+
+	$images = array();
+	foreach($nodes as $node) {
+		foreach ($node->field_image[LANGUAGE_NONE] as $field_image) {
+			$url = file_create_url($field_image['uri']);
+			$images[] = $url;
+		}
+	}
+	return $images;
 }

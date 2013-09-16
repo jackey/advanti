@@ -5,6 +5,18 @@
             return str_replace('#', '', @$link["options"]["attributes"]["style"]);
         }
     }
+
+    function active_is_on_parent($parent_menu_link) {
+        $children = $parent_menu_link["below"];
+        $link = $parent_menu_link["link"];
+        if ($link["link_path"] == $_GET["q"]) return TRUE;
+        foreach ($children as $child) {
+            if ($_GET['q'] == $child["link"]["link_path"]) {
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
 ?>
 <div class="title_con">
 <div class="title_list">
@@ -30,10 +42,11 @@
                     $children = $level1_menu_link["below"];
                 ?>
                 <li>
-                    <a href="<?php print url($link["link_path"])?>" class=""><?php print $link["link_title"]?></a>
+                    <a href="<?php print url($link["link_path"])?>" class="<?php if (active_is_on_parent($level1_menu_link)) print "currenta"?>"><?php print $link["link_title"]?></a>
+                    <?php if (active_is_on_parent($level1_menu_link)):?><b class="current"></b><?php endif;?>
                     <ul class="nav_box_list" style="display: none;">
                     <?php foreach ($children as $level2_menu_link):?>
-                            <li class="<?php if ($_GET['q'] == $level2_menu_link["link"]["link_path"]) print "active"?>"><img src="/<?php print path_to_theme()?>/misc/images/index/travel_06_03.png">
+                            <li><img src="/<?php print path_to_theme()?>/misc/images/index/travel_06_03.png">
                                 <a class="<?php print implode(',', $level2_menu_link["link"]["options"]["attributes"]["class"])?>" id="<?php print @$level2_menu_link["link"]["options"]["attributes"]["id"]?>" href="<?php print url($level2_menu_link["link"]["link_path"], array("fragment" => get_hash_tag_from_menu_link($level2_menu_link["link"])))?>"><?php print $level2_menu_link["link"]["link_title"]?></a>
                             </li>
                     <?php endforeach;?>

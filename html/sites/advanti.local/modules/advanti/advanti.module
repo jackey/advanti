@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Implements hook_webform_submission_insert
+ */
+function advanti_webform_submission_insert($node, $submittion) {
+	$email_me = $_POST["email_me"];
+	if ($email_me == "on") {
+		$message = t("Email To");
+	}
+}
+
+/**
+ * Implements hook_mail()
+ */
+function advanti_mail($key, &$message, $params) {
+	// TODO:
+}

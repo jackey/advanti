@@ -51,3 +51,15 @@
 
 .partner_down .facebook {text-indent: 10000}
 .partner_down .twitter {text-indent: 10000}
+
+#header .nav_box a {text-transform: uppercase;}
+
+.about_website strong {
+background-position: -16px 0;
+width: 17px;
+height: 16px;
+right: 10px;
+top: 8px;
+position: absolute;
+background: url(../images/partner/Partner_bg.png) no-repeat;
+}

@@ -23,11 +23,28 @@
                                     <a href="<?php print url("lifestyle")?>">Back TO<b></b></a>
                                 </div>
                             </div>
-                            <ul class="motor_img">
-                            	<?php foreach ($field_image as $index => $image): ?>
-                                	<li <?php if ($index == 0) print 'style="display:block"'?>><a href="javascript:;" class="fangda"></a><a href="javascript:;"><img src="<?php print file_create_url($image['uri'])?>"></a></li>
-                            	<?php endforeach;?>
-                            </ul>
+
+                            <?php if ($node->field_motorsport_columns['und'][0]['value'] <> "Video" ): ?>
+                                <ul class="motor_img">
+                                	<?php foreach ($field_image as $index => $image): ?>
+                                    	<li <?php if ($index == 0) print 'style="display:block"'?>><a href="javascript:;" class="fangda"></a><a href="javascript:;"><img src="<?php print file_create_url($image['uri'])?>"></a></li>
+                                	<?php endforeach;?>
+                                </ul>
+                            <?php else:?>
+                                <ul class="motor_img">
+                                    <div class="video">
+                                        <?php if(!empty($node->field_video_url)):?>
+                                            <video id="example_video_1" class="video-js vjs-default-skin"  
+                                              controls preload="auto" width="640" height="264"  
+                                              poster="http://video-js.zencoder.com/oceans-clip.png"  
+                                              data-setup='{"example_option":true}'>  
+                                                 <source src="<?php print $node->field_video_url[LANGUAGE_NONE][0]['url']?>"/>
+                                            </video>
+                                        <?php endif;?>
+                                    </div>
+                                </ul>
+                            <?php endif;?>
+
                             <?php if ($node->field_motorsport_columns['und'][0]['value'] <> "Video" ): ?>
                             <div class="motor_list_bot">
                                 <div>
@@ -38,11 +55,8 @@
                                     <a href="javascript:;" class="next_mo"></a>
                                 </div>
                             </div>
-                            <?php else: ?>
-                            <div class="video">
-                                <?php print drupal_render($content["field_video_file"]);?>
-                            </div>
                             <?php endif; ?>
+                            
                         </div>
                         <div class="mort_intro">
                         	<?php print drupal_render($elements["body"])?>
@@ -60,9 +74,9 @@
                 	<h3>SHARE TO FRAND</h3>
                     <div>
                     	<?php 
-                            $links = helper_get_share_link();
+                            $links = helper_get_share_link($node, "medium");
                             foreach ($links as $link) {
-                                print drupal_render($link);
+                                print "<a class='".$link["#options"]["attributes"]["class"]."' href='".$link["#href"]."'><b></b>".$link['#title']."</a>";
                             }
                         ?>
                     </div>

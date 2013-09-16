@@ -41,8 +41,29 @@
 <div id='page'><div class='limiter clearfix'>
 
   <div id='main-content' class='clearfix'>
-    <div id='content' class='clearfix'><?php print render($page['content']) ?></div>
+
+    <div id='content' class='clearfix'>
+        <?php print render($page['content']) ?>
+    </div>
+
+    <?php if ($page["content_bottom"]) :?>
+
+      <div id="content-bottom" class="clearfix">
+        <?php if (arg(0) == "products") :?>
+          <div class="product_nei_list">
+        <?php endif;?>
+          <?php print render($page["content_bottom"])?>
+        <?php if (arg(0) == "products") :?>
+          </div>
+        <?php endif;?>
+      </div>
+    <?php endif;?>
+
   </div>
+
+  <?php if (arg(0) == "products") :?>
+    <div class="scroll_top"><a href="javascript:;" id="scroll_top" style="display: inline;"></a></div>
+  <?php endif;?>
 
 </div></div>
 
@@ -58,5 +79,9 @@
     },function(){
       $('.area_box a')[$(this).index()].style.display="none";
     });
+
+    $().product_list();
   })(jQuery);
 </script>
+
+
